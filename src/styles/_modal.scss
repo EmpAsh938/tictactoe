@@ -1,0 +1,39 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($color: #000, $alpha: 0.4);
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+
+  &__container {
+    max-width: 400px;
+    width: 100%;
+    background-color: $p-blue;
+    padding: 2rem;
+    border-radius: 4px;
+    color: aliceblue;
+
+    & > h3 {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    & > button {
+      display: block;
+      width: 150px;
+      margin: 0 auto;
+      margin-top: 1rem;
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      background-color: transparent;
+      border: solid aliceblue;
+      color: aliceblue;
+    }
+  }
+}

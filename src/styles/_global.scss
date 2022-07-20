@@ -1,0 +1,40 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $p-blue;
+}
+
+section {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  width: 100%;
+  border-radius: 7px;
+  background-color: rgb(8, 26, 46);
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}

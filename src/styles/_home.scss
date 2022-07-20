@@ -1,0 +1,70 @@
+.home {
+  @include flex(column);
+  gap: 2rem;
+  &__head {
+    @include flex(row);
+    align-items: center;
+    justify-content: flex-start;
+    & > h3 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: yellow;
+      &:last-child {
+        color: lime;
+      }
+    }
+  }
+  &__mark {
+    @include flex(column);
+    gap: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    & > h3 {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: gray;
+    }
+    & > div {
+      @include flex(row);
+    }
+    &--area {
+      padding: 0.1rem 0;
+      flex: 1;
+      font-size: 2.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: gray;
+
+      &.active {
+        background-color: gray;
+        color: $p-blue;
+      }
+    }
+  }
+  &__btn {
+    @include flex(column);
+    gap: 1rem;
+
+    & > button {
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background-color: yellow;
+      padding: 1rem 0;
+      border-radius: 5px;
+      box-shadow: inset 0px -7px 7px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s linear;
+      position: relative;
+      // top: 100%;
+
+      &:active {
+        box-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.5);
+      }
+      &:last-child {
+        background-color: lime;
+      }
+    }
+  }
+}

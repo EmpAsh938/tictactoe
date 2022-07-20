@@ -1,0 +1,89 @@
+.board {
+  @include flex(column);
+  gap: 2rem;
+  color: gray;
+
+  &__head {
+    @include flex(row);
+    align-items: center;
+    justify-content: space-between;
+    &--title {
+      @include flex(row);
+      & > h2 {
+        color: yellow;
+        &:last-child {
+          color: lime;
+        }
+      }
+    }
+    &--turn {
+      background-color: gray;
+      color: $p-blue;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+
+    &--btn {
+      & > button {
+        font-size: 0.9rem;
+        color: gray;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__box {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    & > div {
+      cursor: pointer;
+      border: solid gray;
+      display: grid;
+      place-items: center;
+
+      & > h2 {
+        // border: solid green;
+        font-size: 3rem;
+      }
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+
+    & > div {
+      color: $p-blue;
+      text-align: center;
+      border-radius: 4px;
+      background-color: yellow;
+      text-transform: uppercase;
+      padding: 0.5rem 0.2rem;
+      & > h4 {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+      }
+      & > h3 {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+      }
+      &:nth-child(2) {
+        background-color: aliceblue;
+      }
+      &:last-child {
+        background-color: lime;
+      }
+    }
+  }
+}
