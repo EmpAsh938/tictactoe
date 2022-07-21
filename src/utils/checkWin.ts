@@ -1,4 +1,4 @@
-export function checkWin(grid){
+export function checkWin(grid:any){
     let n = grid.length;
     let rows = "";
     let cols = "";

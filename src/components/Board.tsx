@@ -29,7 +29,7 @@ const Board = () => {
                 </div>
             </div>
             <div className="board__box">
-                {grid.map((g,r) => g.map((item, c) => {
+                {grid.map((g:any,r:number) => g.map((item:any, c:number) => {
                     return (
                         <div key={c} onClick={()=>markGrid(r,c)}>
                             <h2>{item}</h2>

@@ -2,10 +2,37 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { checkWin } from "./utils/checkWin";
 import { markComputer } from "./utils/markComputer";
 
-const AppContext = createContext();
+type Props = {
+    children: React.ReactNode;
+}
+
+type WinStateObj = {
+    "X": number;
+    "O": number;
+    "XO": number;
+}
+
+type AppContextValue = {
+    grid: any;
+    count: number;
+    gameOver: boolean;
+    winState: WinStateObj;
+    isPlaying: boolean;
+    playerMark: string;
+    currentMark: string;
+    currentWinner: string;
+    markGrid: (row:number,col:number) => void;
+    resetBoard: () => void;
+    exitPlaying: () => void;
+    startPlaying: () => void;
+    toggleGameMode: (choice:string) => void;
+    togglePlayerMark: (param:string) => void;
+}
+
+const AppContext = createContext<AppContextValue>({} as AppContextValue);
 
 
-const AppProvider = ({children}) => {
+const AppProvider = ({children}: Props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [winState, setWinState] = useState({
         "X":0,
@@ -33,7 +60,7 @@ const AppProvider = ({children}) => {
         ['', '', '']
     ])
 
-    const togglePlayerMark = (param) => setPlayerMark(param);
+    const togglePlayerMark = (param:string) => setPlayerMark(param);
 
     const startPlaying = () => setIsPlaying(true);
 
@@ -58,14 +85,14 @@ const AppProvider = ({children}) => {
         setIsPlaying(false);
     }
 
-    const toggleGameMode = (choice) => {
+    const toggleGameMode = (choice:string) => {
         setGameMode(gameMode.map(item => {
             if(item.type === choice) item.isActive = true;
             return item;
         }))
     }
 
-    const markGrid = (row,col) => {
+    const markGrid = (row:number,col:number) => {
         if(!grid[row][col]) {
             setGrid(grid.map((gd, r) => gd.map((item, c) => {
                 if(r===row&&c===col){
@@ -96,8 +123,8 @@ const AppProvider = ({children}) => {
     const playComputer = () => {
         if(playerMark !== currentMark && !gameOver) {
             // mark the empty box
-            let newGrid = markComputer(grid);
-            if(newGrid !== -1) {
+            let newGrid:number[] = markComputer(grid);
+            if(newGrid.length == 2) {
                 markGrid(newGrid[0],newGrid[1]);
                 // change the current mark;
                 toggleCurrentMark();
@@ -105,7 +132,7 @@ const AppProvider = ({children}) => {
         }
     }
 
-    const handleWinState = (winner) => {
+    const handleWinState = (winner:string) => {
         setCurrentWinner(winner);
         setWinState(prev => {
             if(winner === "") {

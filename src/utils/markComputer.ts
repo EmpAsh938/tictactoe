@@ -1,6 +1,6 @@
 
 
-export const markComputer = (grid) => {
+export const markComputer = (grid:any) => {
     let emptyGrid = [];
     let row = grid.length;
     let col = grid[0].length;
@@ -12,6 +12,6 @@ export const markComputer = (grid) => {
             }
         }
     }
-    if(emptyGrid.length === 0) return -1;
+    if(emptyGrid.length === 0) return new Array(-1,-1,-1);
     return emptyGrid[Math.floor(Math.random() * emptyGrid.length)];
 }
