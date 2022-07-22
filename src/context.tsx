@@ -6,45 +6,55 @@ type Props = {
     children: React.ReactNode;
 }
 
+
+type PlayerMark = 'X' | 'O';
+
+export type WinnerMark = PlayerMark | '';
+
 type WinStateObj = {
     "X": number;
     "O": number;
     "XO": number;
 }
 
+type GameMode = {
+    type: string;
+    isActive: boolean;
+}
+
 type AppContextValue = {
-    grid: any;
+    grid: WinnerMark[][];
     count: number;
     gameOver: boolean;
     winState: WinStateObj;
     isPlaying: boolean;
-    playerMark: string;
-    currentMark: string;
-    currentWinner: string;
+    playerMark: PlayerMark;
+    currentMark: PlayerMark;
+    currentWinner: WinnerMark;
     markGrid: (row:number,col:number) => void;
     resetBoard: () => void;
     exitPlaying: () => void;
     startPlaying: () => void;
     toggleGameMode: (choice:string) => void;
-    togglePlayerMark: (param:string) => void;
+    togglePlayerMark: (param:PlayerMark) => void;
 }
 
 const AppContext = createContext<AppContextValue>({} as AppContextValue);
 
 
 const AppProvider = ({children}: Props) => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [winState, setWinState] = useState({
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [winState, setWinState] = useState<WinStateObj>({
         "X":0,
         "O":0,
         "XO":0,
     });
-    const [count, setCount] = useState(0);
-    const [gameOver, setGameOver] = useState(false);
-    const [playerMark, setPlayerMark] = useState('X');
-    const [currentMark, setCurrentMark] = useState('X');
-    const [currentWinner, setCurrentWinner] = useState('');
-    const [gameMode, setGameMode] = useState([
+    const [count, setCount] = useState<number>(0);
+    const [gameOver, setGameOver] = useState<boolean>(false);
+    const [playerMark, setPlayerMark] = useState<PlayerMark>('X');
+    const [currentMark, setCurrentMark] = useState<PlayerMark>('X');
+    const [currentWinner, setCurrentWinner] = useState<WinnerMark>('');
+    const [gameMode, setGameMode] = useState<GameMode[]>([
         {
             type:'pvp',
             isActive:false
@@ -54,13 +64,13 @@ const AppProvider = ({children}: Props) => {
             isActive:false,
         }
     ]);
-    const [grid, setGrid] = useState([
+    const [grid, setGrid] = useState<WinnerMark[][]>([
         ['', '', ''],
         ['', '', ''],
         ['', '', '']
     ])
 
-    const togglePlayerMark = (param:string) => setPlayerMark(param);
+    const togglePlayerMark = (param:PlayerMark) => setPlayerMark(param);
 
     const startPlaying = () => setIsPlaying(true);
 
@@ -124,7 +134,7 @@ const AppProvider = ({children}: Props) => {
         if(playerMark !== currentMark && !gameOver) {
             // mark the empty box
             let newGrid:number[] = markComputer(grid);
-            if(newGrid.length == 2) {
+            if(newGrid.length === 2) {
                 markGrid(newGrid[0],newGrid[1]);
                 // change the current mark;
                 toggleCurrentMark();
@@ -132,7 +142,7 @@ const AppProvider = ({children}: Props) => {
         }
     }
 
-    const handleWinState = (winner:string) => {
+    const handleWinState = (winner:WinnerMark) => {
         setCurrentWinner(winner);
         setWinState(prev => {
             if(winner === "") {
@@ -159,7 +169,7 @@ const AppProvider = ({children}: Props) => {
     
     useEffect(() => {
         setCount(countFilledBox());
-        let res = checkWin(grid);
+        let res:WinnerMark = checkWin(grid);
         if(res || count === 8) {
             setGameOver(true);
             handleWinState(res);
