@@ -1,4 +1,4 @@
-import { useGlobalContext } from "../context";
+import { useGlobalContext, WinnerMark } from "../context";
 import Modal from "./Modal";
 
 const Board = () => {
@@ -29,7 +29,7 @@ const Board = () => {
                 </div>
             </div>
             <div className="board__box">
-                {grid.map((g:any,r:number) => g.map((item:any, c:number) => {
+                {grid.map((g:WinnerMark[],r:number) => g.map((item:WinnerMark, c:number) => {
                     return (
                         <div key={c} onClick={()=>markGrid(r,c)}>
                             <h2>{item}</h2>
