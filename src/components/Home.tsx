@@ -7,7 +7,7 @@ const Home = () => {
         toggleGameMode,
         togglePlayerMark 
     } = useGlobalContext();
-    const handleNewGame = (ch) => {
+    const handleNewGame = (ch:string) => {
         startPlaying();
         toggleGameMode(ch);
     }
